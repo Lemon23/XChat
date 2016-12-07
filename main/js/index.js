@@ -32,7 +32,7 @@ Chat.prototype = {
         });
         this.socket.on('system', function(nickName, userCount, type) {
             var msg = nickName + (type == 'login' ? ' join' : ' leave');
-            that._displayNewMsg('system ', msg, 'red');
+            that._displayNewMsg('system', msg, '#9e9e9e');
             document.getElementById('status').textContent = userCount + (userCount > 1 ? ' users' : ' user') + ' online';
             document.getElementById('username').textContent = nickName
         });
@@ -140,7 +140,15 @@ Chat.prototype = {
             //determine whether the msg contains emoji
             msg = this._showEmoji(msg);
         msgToDisplay.style.color = color || '#000';
-        msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + '): </span>' + msg;
+        if(user === 'me') {
+            msgToDisplay.style.textAlign = 'right';
+            msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + '): </span>' + msg;
+        } else if (user === 'system') {
+            msgToDisplay.style.textAlign = 'center';
+            msgToDisplay.innerHTML = user + ': ' + msg;
+        } else {
+            msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + '): </span>' + msg;
+        }
         container.appendChild(msgToDisplay);
         container.scrollTop = container.scrollHeight;
     },
