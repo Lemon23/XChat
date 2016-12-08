@@ -14,11 +14,19 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <div class="wrapper">
+<div class="main">
+    <div class="user_list">
         <div class="banner">
             <p id="username"></p>
             <p id="status"></p>
         </div>
+        <ul id="list">
+            <li>sadfasdfadf</li>
+            <li>sadfasdfadfsadfasdfadf</li>
+        </ul>
+        <footer>&copy; lemon</footer>
+    </div>
+    <div class="wrapper">
         <div id="historyMsg"></div>
         <div class="controls" >
             <div class="items">
@@ -32,11 +40,13 @@
             </div>
             <textarea id="messageInput" placeHolder="enter to send"></textarea>
             <div id="emojiWrapper"></div>
-        </div>
-        <div>
-            <input id="sendBtn" class="btn" type="button" value="SEND" />
+            <div>
+                <input id="sendBtn" class="btn" type="button" value="SEND" />
+            </div>
         </div>
     </div>
+</div>
+
     <div id="loginWrapper">
         <p id="info">connecting to server...</p>
         <div id="nickWrapper">
@@ -44,9 +54,6 @@
             <input type="button" value="OK" id="loginBtn" />
         </div>
     </div>
-    <footer>
-        <p>&copy; lemon</p>
-    </footer>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="js/index.js"></script>
