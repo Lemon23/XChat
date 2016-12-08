@@ -142,12 +142,14 @@ Chat.prototype = {
         msgToDisplay.style.color = color || '#000';
         if(user === 'me') {
             msgToDisplay.style.textAlign = 'right';
-            msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + '): </span>' + msg;
+            msgToDisplay.setAttribute('class', 'trans_right')
+            msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + ')</span><br/>' + '<p class="msg">'+ msg +'</p>';
         } else if (user === 'system') {
             msgToDisplay.style.textAlign = 'center';
             msgToDisplay.innerHTML = user + ': ' + msg;
         } else {
-            msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + '): </span>' + msg;
+            msgToDisplay.setAttribute('class', 'trans_left')
+            msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + ')</span><br/>' + '<p class="msg">'+ msg +'</p>';
         }
         container.appendChild(msgToDisplay);
         container.scrollTop = container.scrollHeight;
@@ -157,7 +159,14 @@ Chat.prototype = {
             msgToDisplay = document.createElement('p'),
             date = new Date().toTimeString().substr(0, 8);
         msgToDisplay.style.color = color || '#555';
-        msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + '): </span> <br/>' + '<a href="' + imgData + '" target="_blank"><img style="max-height: 200px;margin-top: 10px;" src="' + imgData + '"/></a>';
+        if(user === 'me') {
+            msgToDisplay.style.textAlign = 'right';
+            msgToDisplay.setAttribute('class', 'trans_right')
+            msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + ')</span><br/>' + '<p class="msg"><a href="' + imgData + '" target="_blank"><img style="max-height: 200px;margin-top: 10px;" src="' + imgData + '"/></a></p>';
+        } else {
+            msgToDisplay.setAttribute('class', 'trans_left')
+            msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + ')</span><br/>' + '<p class="msg"><a href="' + imgData + '" target="_blank"><img style="max-height: 200px;margin-top: 10px;" src="' + imgData + '"/></a></p>';
+        }
         container.appendChild(msgToDisplay);
         container.scrollTop = container.scrollHeight;
     },
