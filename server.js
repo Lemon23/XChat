@@ -20,14 +20,14 @@ io.sockets.on('connection', function(socket) {
             socket.nickname = nickname;
             users.push(nickname);
             socket.emit('loginSuccess');
-            io.sockets.emit('system', nickname, users.length, 'login');
+            io.sockets.emit('system', nickname, users, 'login');
         };
     });
     //user leaves
     socket.on('disconnect', function() {
         if (socket.nickname != null) {
             users.splice(socket.userIndex, 1);
-            socket.broadcast.emit('system', socket.nickname, users.length, 'logout');
+            socket.broadcast.emit('system', socket.nickname, users, 'logout');
         }
     });
     //new message get
