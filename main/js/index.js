@@ -30,11 +30,24 @@ Chat.prototype = {
                 document.getElementById('info').textContent = 'fail to connect.';
             }
         });
-        this.socket.on('system', function(nickName, userCount, type) {
+        this.socket.on('system', function(nickName, users, type) {
             var msg = nickName + (type == 'login' ? ' join' : ' leave');
             that._displayNewMsg('system', msg, '#9e9e9e');
-            document.getElementById('status').textContent = userCount + (userCount > 1 ? ' users' : ' user') + ' online';
-            document.getElementById('username').textContent = nickName
+            document.getElementById('status').textContent = users.length + (users.length > 1 ? ' users' : ' user') + ' online';
+            document.getElementById('username').textContent = nickName;
+            if(type == 'login') {
+                document.getElementById('list').innerHTML = '';
+                for (var i = 0; i < users.length; i++) {
+                    var li = document.createElement('li');
+                    li.innerHTML = users[i];
+                    li.setAttribute('id', users[i]);
+                    document.getElementById('list').appendChild(li);
+                }
+
+            } else {
+                document.getElementById(nickName).remove();
+            }
+            console.log(users)
         });
         this.socket.on('newMsg', function(user, msg, color) {
             that._displayNewMsg(user, msg, color);
