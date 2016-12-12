@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>X-Chat</title>
-
+    <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -29,25 +29,25 @@
         <div id="historyMsg"></div>
         <div class="controls" >
             <div class="items">
-                <input id="colorStyle" type="color" placeHolder='#555' title="font color" />
-                <input id="emoji" class="btn" type="button" value="emoji" title="emoji" />
-                <label for="sendImage" class="imageLable">
-                    <input type="button" class="btn" value="image" />
+                <i id="emoji" class="fa fa-meh-o icon_fa" aria-hidden="true"></i>
+                <div class="sendImage_tab">
+                    <i class="fa fa-folder-o icon_fa" aria-hidden="true"></i>
                     <input id="sendImage" class="btn" type="file" value="image"/>
-                </label>
+                </div>
                 <input id="clearBtn" class="btn" type="button" value="clear" title="clear screen" />
             </div>
             <textarea id="messageInput" placeHolder="enter to send"></textarea>
             <div id="emojiWrapper"></div>
-            <div>
-                <input id="sendBtn" class="btn" type="button" value="SEND" />
-            </div>
+            <input id="sendBtn" class="btn" type="button" value="SEND" />
         </div>
     </div>
 </div>
 
     <div id="loginWrapper">
-        <p id="info">connecting to server...</p>
+        <p id="info">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+        </p>
         <div id="nickWrapper">
             <input type="text" placeHolder="nickname" id="nicknameInput" />
             <input type="button" value="OK" id="loginBtn" />
