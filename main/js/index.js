@@ -73,24 +73,22 @@ Chat.prototype = {
         }, false);
         document.getElementById('sendBtn').addEventListener('click', function() {
             var messageInput = document.getElementById('messageInput'),
-                msg = messageInput.value,
-                color = document.getElementById('colorStyle').value;
+                msg = messageInput.value;
             messageInput.value = '';
             messageInput.focus();
             if (msg.trim().length != 0) {
-                that.socket.emit('postMsg', msg, color);
-                that._displayNewMsg('me', msg, color);
+                that.socket.emit('postMsg', msg);
+                that._displayNewMsg('me', msg);
                 return;
             };
         }, false);
         document.getElementById('messageInput').addEventListener('keyup', function(e) {
             var messageInput = document.getElementById('messageInput'),
-                msg = messageInput.value,
-                color = document.getElementById('colorStyle').value;
+                msg = messageInput.value;
             if (e.keyCode == 13 && msg.trim().length != 0) {
                 messageInput.value = '';
-                that.socket.emit('postMsg', msg, color);
-                that._displayNewMsg('me', msg, color);
+                that.socket.emit('postMsg', msg);
+                that._displayNewMsg('me', msg);
             };
         }, false);
         document.getElementById('clearBtn').addEventListener('click', function() {
@@ -99,8 +97,7 @@ Chat.prototype = {
         document.getElementById('sendImage').addEventListener('change', function() {
             if (this.files.length != 0) {
                 var file = this.files[0],
-                    reader = new FileReader(),
-                    color = document.getElementById('colorStyle').value;
+                    reader = new FileReader();
                 if (!reader) {
                     that._displayNewMsg('system', 'your browser doesn\'t support fileReader.', 'red');
                     this.value = '';
@@ -108,8 +105,8 @@ Chat.prototype = {
                 };
                 reader.onload = function(e) {
                     this.value = '';
-                    that.socket.emit('img', e.target.result, color);
-                    that._displayImage('me', e.target.result, color);
+                    that.socket.emit('img', e.target.result);
+                    that._displayImage('me', e.target.result);
                 };
                 reader.readAsDataURL(file);
             };
@@ -152,16 +149,16 @@ Chat.prototype = {
             date = new Date().toTimeString().substr(0, 8),
             //determine whether the msg contains emoji
             msg = this._showEmoji(msg);
-        msgToDisplay.style.color = color || '#000';
+        msgToDisplay.style.color = color || '#333';
         if(user === 'me') {
             msgToDisplay.style.textAlign = 'right';
-            msgToDisplay.setAttribute('class', 'trans_right')
+            msgToDisplay.setAttribute('class', 'trans_right');
             msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + ')</span><br/>' + '<p class="msg">'+ msg +'</p>';
         } else if (user === 'system') {
             msgToDisplay.style.textAlign = 'center';
             msgToDisplay.innerHTML = user + ': ' + msg;
         } else {
-            msgToDisplay.setAttribute('class', 'trans_left')
+            msgToDisplay.setAttribute('class', 'trans_left');
             msgToDisplay.innerHTML = user + '<span class="timespan">(' + date + ')</span><br/>' + '<p class="msg">'+ msg +'</p>';
         }
         container.appendChild(msgToDisplay);
@@ -171,7 +168,7 @@ Chat.prototype = {
         var container = document.getElementById('historyMsg'),
             msgToDisplay = document.createElement('p'),
             date = new Date().toTimeString().substr(0, 8);
-        msgToDisplay.style.color = color || '#555';
+        msgToDisplay.style.color = color || '#333';
         if(user === 'me') {
             msgToDisplay.style.textAlign = 'right';
             msgToDisplay.setAttribute('class', 'trans_right')

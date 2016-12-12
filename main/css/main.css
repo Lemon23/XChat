@@ -159,11 +159,7 @@ html, body {
 .items {
     height: 30px;
 }
-#colorStyle {
-    width: 50px;
-    border: none;
-    padding: 0;
-}
+
 /*custom the file input*/
 
 .imageLable {
@@ -181,11 +177,21 @@ html, body {
 .btn:focus {
     outline: none;
 }
+.icon_fa {
+    color: #555;
+    margin-right: 15px;
+    font-size: 25px;
+}
+.sendImage_tab {
+    display: inline;
+}
 #sendImage {
-    position: absolute;
-    width: 50px;
-    left: 0;
+    position: relative;
+    max-width: 20px;
+    left: -42px;
     opacity: 0;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
 }
 /*end custom file input*/
