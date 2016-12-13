@@ -11,12 +11,15 @@ Chat.prototype = {
         var that = this;
         this.socket = io.connect();
         this.socket.on('connect', function() {
-            document.getElementById('info').textContent = 'get yourself a nickname:';
+            document.getElementById('info').textContent = 'Nickname：（2-10 letters or numbers）';
             document.getElementById('nickWrapper').style.display = 'block';
             document.getElementById('nicknameInput').focus();
         });
         this.socket.on('nickExisted', function() {
-            document.getElementById('info').textContent = 'nickname is taken, choose another please!';
+            document.getElementById('info').textContent = 'Nickname is repeated!';
+        });
+        this.socket.on('nickFoul', function() {
+            document.getElementById('info').textContent = 'Input error: must be 2-10 letters or numbers!';
         });
         this.socket.on('loginSuccess', function() {
             document.title = 'X-Chat | ' + document.getElementById('nicknameInput').value;
@@ -25,13 +28,13 @@ Chat.prototype = {
         });
         this.socket.on('error', function(err) {
             if (document.getElementById('loginWrapper').style.display == 'none') {
-                document.getElementById('status').textContent = 'fail to connect.';
+                document.getElementById('status').textContent = 'Connection error, SORRY!';
             } else {
-                document.getElementById('info').textContent = 'fail to connect.';
+                document.getElementById('info').textContent = 'Connection error, SORRY!';
             }
         });
         this.socket.on('system', function(nickName, users, type) {
-            var msg = nickName + (type == 'login' ? ' join' : ' leave');
+            var msg = nickName + (type == 'login' ? ' JOIN' : ' LEFT');
             that._displayNewMsg('system', msg, '#9e9e9e');
             document.getElementById('status').textContent = users.length + (users.length > 1 ? ' users' : ' user') + ' online';
             document.getElementById('username').textContent = nickName;

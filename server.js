@@ -3,6 +3,7 @@ var express = require('express'),
     server = require('http').createServer(app),
     io = require('socket.io').listen(server),
     users = [];
+var reg = new RegExp("^([\u4E00-\uFA29]|[\uE7C7-\uE7F3]|[a-zA-Z0-9]){2,9}$");
 //specify the html we will use
 app.use('/', express.static(__dirname + '/main'));
 server.listen(3000);//for local test
@@ -15,6 +16,8 @@ io.sockets.on('connection', function(socket) {
     socket.on('login', function(nickname) {
         if (users.indexOf(nickname) > -1) {
             socket.emit('nickExisted');
+        } else if(!reg.test(nickname)) {
+            socket.emit('nickFoul');
         } else {
             socket.userIndex = users.length;
             socket.nickname = nickname;
