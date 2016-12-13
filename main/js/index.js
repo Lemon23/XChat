@@ -18,6 +18,9 @@ Chat.prototype = {
         this.socket.on('nickExisted', function() {
             document.getElementById('info').textContent = 'nickname is taken, choose another please!';
         });
+        this.socket.on('nickFoul', function() {
+            document.getElementById('info').textContent = 'nickname is foul!';
+        });
         this.socket.on('loginSuccess', function() {
             document.title = 'X-Chat | ' + document.getElementById('nicknameInput').value;
             document.getElementById('loginWrapper').style.display = 'none';
